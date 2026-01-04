@@ -1,0 +1,18 @@
+
+@startuml
+left to right direction
+
+actor User as "Water Quality Analyst"
+actor System as "Water Quality Monitoring System"
+
+rectangle "Urban Water Quality Prediction System" {
+    User -- (Load Dataset)
+    User -- (Preprocess Data)
+    User -- (Train Model)
+    User -- (Evaluate Model)
+    User -- (Save Model)
+    User -- (Predict Water Quality)
+    System ..> (Predict Water Quality) : provides input data
+}
+
+@enduml

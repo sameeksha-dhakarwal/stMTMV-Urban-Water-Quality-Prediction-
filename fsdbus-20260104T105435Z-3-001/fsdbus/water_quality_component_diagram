@@ -1,0 +1,31 @@
+// Water Quality Prediction Component Diagram
+digraph {
+	subgraph cluster_data {
+		label="Data Handling"
+		DataLoader [label="Data Loader"]
+		Scaler [label="Feature Scaler"]
+	}
+	subgraph cluster_model {
+		label=Model
+		ModelBuilder [label="Model Builder"]
+		Trainer [label="Model Trainer"]
+		Predictor [label=Predictor]
+	}
+	subgraph cluster_eval {
+		label=Evaluation
+		Evaluator [label=Evaluator]
+	}
+	subgraph cluster_persist {
+		label=Persistence
+		ModelStorage [label="Model & Scaler Storage"]
+	}
+	DataLoader -> Scaler [label="preprocesses data"]
+	Scaler -> Trainer [label="scaled data"]
+	Trainer -> ModelBuilder [label=trains]
+	ModelBuilder -> Predictor [label="provides trained model"]
+	Predictor -> Evaluator [label="generates predictions"]
+	Evaluator -> Trainer [label=feedback]
+	Trainer -> ModelStorage [label="save model"]
+	Scaler -> ModelStorage [label="save scaler"]
+	ModelStorage -> Predictor [label="load model & scaler"]
+}
